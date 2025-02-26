@@ -113,16 +113,16 @@ public class ArbolBinario<T> {
         return resultado;
     }
     
-    public void construirTablaCodigos(ArbolBinario.Nodo raiz, String codigo) {
+    public void construirTablaCodigos(ArbolBinario.Nodo<T> raiz, String codigo) {
         if (raiz == null) return;
         if (raiz.izquierda == null && raiz.derecha == null) {
-            tablaCodigos.insertar((T) raiz.dato, codigo);
+            tablaCodigos.insertar(raiz.dato, codigo);
         }
         construirTablaCodigos(raiz.izquierda, codigo + "0");
         construirTablaCodigos(raiz.derecha, codigo + "1");
     }
     public void construirTablaCodigos(String codigo) {
-        construirTablaCodigos(raiz, codigo);
+        construirTablaCodigos(raiz, "");
     }
     
     public void postOrden(Nodo <T> nodo){

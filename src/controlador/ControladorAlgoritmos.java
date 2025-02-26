@@ -147,6 +147,7 @@ public class ControladorAlgoritmos {
 
         ArbolBinario<Character> arbol = new ArbolBinario(raiz);
         arbol.construirTablaCodigos(texto);
+        
         Mapa<Character, String> tablaCodigos = arbol.getTablaCodigos();
         
         
