@@ -152,6 +152,12 @@ public class ControladorAlgoritmos {
         
         
         StringBuilder resultado = new StringBuilder();
+        
+        Lista<Character> claves = frecuencias.getClaves();
+        for (int i=0; i<claves.getTamanio(); i++) {
+            resultado.append(claves.verElemento(i)).append(" -> ").append(tablaCodigos.obtener(claves.verElemento(i))).append("\n");
+        }
+        
         for (char c : texto.toCharArray()) {
             resultado.append(tablaCodigos.obtener(c));
         }

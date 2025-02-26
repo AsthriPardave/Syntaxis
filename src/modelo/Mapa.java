@@ -34,14 +34,16 @@ public class Mapa<K, V> {
             cabeza = nuevo;
         } else {
             Nodo<K, V> aux = cabeza;
-            while (aux.siguiente != null) {
+            Nodo<K, V> aux2 = cabeza;
+            while (aux != null) {
                 if (aux.clave == clave) {
                     aux.valor = valor;
                     return;
                 }
+                aux2 = aux;
                 aux = aux.siguiente;
             }
-            aux.siguiente = nuevo;
+            aux2.siguiente = nuevo;
         }
         tamanio++;
     }
