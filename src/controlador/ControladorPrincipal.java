@@ -43,6 +43,10 @@ public class ControladorPrincipal {
                         expresion = expresion.replace(" ", "");
                         String posfija = ControladorAlgoritmos.infijaAPosfija(expresion);
                         fr.output.setText(posfija);
+                    } else if (texto.contains("HUFFMAN")) {
+                        String expresion = texto.substring(8);
+                        String codificacion = ControladorAlgoritmos.huffman(expresion);
+                        fr.output.setText(codificacion);
                     }
                 }
             }

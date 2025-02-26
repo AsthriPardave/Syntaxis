@@ -69,6 +69,21 @@ public class Lista<T> {
         }
     }
     
+    public void agregar(T dato) {
+        Nodo nuevo = new Nodo(dato);
+        aux1 = cabeza;
+        if(cabeza == null){
+            cabeza = nuevo;
+            cabeza.anterior = cabeza.siguiente = cabeza;
+        } else{
+            nuevo.siguiente = cabeza;
+            nuevo.anterior = cabeza.anterior;
+            cabeza.anterior.siguiente = nuevo;
+            cabeza.anterior = nuevo;
+        }
+        tamanio++;
+    }
+    
     public T eliminar(int indice){
         aux1 = cabeza;
         T x;

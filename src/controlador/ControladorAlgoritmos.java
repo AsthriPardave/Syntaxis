@@ -4,6 +4,10 @@
  */
 package controlador;
 
+import modelo.ArbolBinario;
+import modelo.ColaPrioridad;
+import modelo.Lista;
+import modelo.Mapa;
 import modelo.Pila;
 
 /**
@@ -133,5 +137,47 @@ public class ControladorAlgoritmos {
         return pila.eliminar();
     }
     
+    public static String huffman(String texto){
+        
+        Mapa<Character, Integer> frecuencias = new Mapa<>();
+        for (char c : texto.toCharArray()) {
+            frecuencias.insertar(c, frecuencias.obtener(c, 0) + 1);
+        }
+        ArbolBinario.Nodo<Character> raiz = construirArbolHuffman(frecuencias);
+
+        ArbolBinario<Character> arbol = new ArbolBinario(raiz);
+        arbol.construirTablaCodigos(texto);
+        Mapa<Character, String> tablaCodigos = arbol.getTablaCodigos();
+        
+        
+        StringBuilder resultado = new StringBuilder();
+        for (char c : texto.toCharArray()) {
+            resultado.append(tablaCodigos.obtener(c));
+        }
+        return resultado.toString();
+        
+    }
     
+    
+    public static ArbolBinario.Nodo<Character> construirArbolHuffman(Mapa<Character, Integer> frecuencias) {
+        ColaPrioridad<ArbolBinario.Nodo<Character>> cola = new ColaPrioridad<>();
+
+        Lista<Character> claves = frecuencias.getClaves();
+        for (int i=0; i<claves.getTamanio(); i++) {            
+            char clave = claves.verElemento(i);
+            int freq = frecuencias.obtener(clave);
+            
+            cola.agregar(new ArbolBinario.Nodo<>(clave, freq), freq);
+        }
+
+        while (cola.getTamanio() > 1) {
+            ArbolBinario.Nodo<Character> izq = cola.eliminar();
+            ArbolBinario.Nodo<Character> der = cola.eliminar();
+            ArbolBinario.Nodo<Character> nuevo = new ArbolBinario.Nodo<>('\0', izq.frecuencia + der.frecuencia);
+            nuevo.izquierda = izq;
+            nuevo.derecha = der;
+            cola.agregar(nuevo, nuevo.frecuencia);
+        }
+        return cola.eliminar();
+    }
 }

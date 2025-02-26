@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package modelo;
 
 /**
@@ -20,9 +21,11 @@ public class Mapa<K, V> {
         }
     }
     Nodo<K, V> cabeza;
+    int tamanio;
     
     public Mapa() {
         this.cabeza = null;
+        this.tamanio = 0;
     }
     
     public void insertar(K clave, V valor) {
@@ -40,6 +43,7 @@ public class Mapa<K, V> {
             }
             aux.siguiente = nuevo;
         }
+        tamanio++;
     }
     
     public V obtener(K clave) {
@@ -48,8 +52,19 @@ public class Mapa<K, V> {
             if (aux.clave == clave) {
                 return aux.valor;
             }
+            aux = aux.siguiente;
         }
         throw new IllegalStateException("No existe la clave");
+    }
+    public V obtener(K clave, V defecto) {
+        Nodo<K, V> aux = cabeza;
+        while (aux != null) {
+            if (aux.clave == clave) {
+                return aux.valor;
+            }
+            aux = aux.siguiente;
+        }
+        return defecto;
     }
     public void eliminar(K clave) {
         Nodo<K, V> aux1 = cabeza;
@@ -65,5 +80,15 @@ public class Mapa<K, V> {
         } else {
             throw new IllegalStateException("No se encuentra el elemento");
         }
+        tamanio--;
+    }
+    public Lista<K> getClaves() {
+        Lista<K> claves = new Lista();
+        Nodo<K, V> aux = cabeza;
+        while (aux != null) {
+            claves.agregar(aux.clave);
+            aux = aux.siguiente;
+        }
+        return claves;
     }
 }

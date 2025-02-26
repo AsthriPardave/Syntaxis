@@ -18,16 +18,6 @@ public class App {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        /*Lista lista = new Lista ();
-        
-        lista.agregar(2, 0); 
-        lista.agregar(4, 1);  
-        lista.agregar(6, 1);
-        lista.agregar(8, 0);
-        System.out.println(lista);
-        lista.eliminar(0);
-        System.out.println(lista);
-        */
         ControladorPrincipal controlador = new ControladorPrincipal();
         controlador.run();
     }
