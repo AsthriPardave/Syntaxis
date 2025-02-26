@@ -7,6 +7,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import modelo.Lista;
 import vista.VistaPrincipal;
 
 /**
@@ -47,6 +48,25 @@ public class ControladorPrincipal {
                         String expresion = texto.substring(8);
                         String codificacion = ControladorAlgoritmos.huffman(expresion);
                         fr.output.setText(codificacion);
+                    } else if(texto.contains("ORDENAR")){
+                        String expresion = texto.substring(8);
+                        String[] items = expresion.split(" ");
+                        Lista<String> elementos = new Lista <>();
+                        boolean numeros = true;
+                        for (int i = 0; i < items.length; i++) {
+                            try{
+                                Double.parseDouble(items[i]);
+                            } catch(NumberFormatException ex) {
+                                numeros = false;
+                            }
+                            elementos.agregar(items[i]);
+                        }
+                        if(numeros == true){
+                            elementos.ordenar((a,b)-> Double.parseDouble(a) < Double.parseDouble(b));
+                        } else {
+                            elementos.ordenar((a,b)-> a.charAt(0) < b.charAt(0));
+                        }
+                        fr.output.setText(elementos+"");
                     }
                 }
             }

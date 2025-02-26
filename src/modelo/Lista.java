@@ -137,7 +137,7 @@ public class Lista<T> {
         aux1 = cabeza;
         String texto = "";
         for (int i = 0; i < tamanio; i++) {
-            texto += aux1.dato +" ↔ "; 
+            texto += aux1.dato +" "; 
             aux1 = aux1.siguiente;
         }
         return texto;
@@ -154,7 +154,7 @@ public class Lista<T> {
     
     public void ordenar(Comparator<T> comparador) {
         if (cabeza == null || tamanio < 2) {
-            return; // No hay necesidad de ordenar si está vacía o tiene solo un elemento
+            return;
         }
 
         boolean b;
@@ -163,15 +163,14 @@ public class Lista<T> {
             Nodo<T> actual = cabeza;
 
             for (int i = 0; i < tamanio - 1; i++) {
-                Nodo<T> siguiente = actual.siguiente;
 
-                if (comparador.comparar(siguiente.dato, actual.dato)) { 
+                if (comparador.comparar(actual.siguiente.dato, actual.dato)) { 
                     T temp = actual.dato;
-                    actual.dato = siguiente.dato;
-                    siguiente.dato = temp;
+                    actual.dato = actual.siguiente.dato;
+                    actual.siguiente.dato = temp;
                     b = true;
                 }
-                actual = siguiente;
+                actual = actual.siguiente;
             }
         } while (b);
     }

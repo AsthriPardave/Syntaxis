@@ -160,6 +160,7 @@ public class ControladorAlgoritmos {
         
         for (char c : texto.toCharArray()) {
             resultado.append(tablaCodigos.obtener(c));
+            resultado.append(" ");
         }
         return resultado.toString();
         
