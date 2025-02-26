@@ -26,7 +26,7 @@ public class ControladorPrincipal {
                 String texto = fr.input.getText();
                 texto = texto.toUpperCase();
                 if("".equals(texto)){
-                    JOptionPane.showMessageDialog(fr, "Texto vacio, escribe algo oe");
+                    JOptionPane.showMessageDialog(fr, "Texto vacio, escribe una expresión");
                 } else {
                     if(texto.contains("RESOLVER")){
                         String expresion = texto.substring(9);
